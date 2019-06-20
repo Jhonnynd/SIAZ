@@ -12,6 +12,8 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -23,8 +25,9 @@
 		</div>
 		<div class="titulo">
 			<h1>Sistema de Información Administrativo ZUMAQUE</h1>
-		</div> 
+		</div>
 	</header>
+	
 		<div class="barra clearfix">
 			<div class="menu-movil">
 				<span></span>
@@ -64,16 +67,8 @@
 						<input type="text" name="telefono" id="telefono" placeholder="Teléfono">
 				</div>
 			</div>
-			<div class="right">
-				<div class="campo">
-					<label for="departamento">Departamento:<br>
-						<select name="cargo" value="-Any-">
-							<option>Selecciona un departamento</option>
-							<option value=""></option>
-						</select>
-					</label>
-					</div>
 
+			<!-- <div class="right">
 				<div class="campo">
 					<label for="cargo">Cargo:<br>
 						<select name="cargo" value="-Any-">
@@ -81,7 +76,8 @@
 							<option value=""></option>
 						</select>
 					</label>
-				</div>
+				</div> -->
+				
 				<input class="agregar" type="submit" value="Agregar empleado">
 			</div>
 				

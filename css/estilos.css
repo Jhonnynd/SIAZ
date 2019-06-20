@@ -104,7 +104,6 @@ nav.navegacion ul {
 		width: 100%;
 		}	
 }
-
 nav.navegacion li:first-child{
 	margin-left: 0;
 }
@@ -118,7 +117,7 @@ nav.navegacion ul li a{
 	display: block;
 	text-decoration: none;
 	color: white;
-	padding: 10px 300px;
+	padding: 15px 20px;
 	margin: 0 auto;
 	font-size: 15px;
 	border: 0.2px solid white;
@@ -126,7 +125,11 @@ nav.navegacion ul li a{
 	padding: 10px 25px;
 	font-size: 25px;
 }
-
+@media only screen and (max-width: 880px){
+	nav.navegacion ul li a{
+		padding: 10px 15px;
+	}
+}
 nav.navegacion a:hover{
 	background-color: #b2b1af70;;
 }
@@ -168,7 +171,7 @@ ul.seleccion li{
 
 ul.seleccion li a{
 	display:block;
-	background-color: #025d9c;
+	background-color: #005fa6;
 	padding: 40px 30px;
 	text-decoration: none;
 	color:white;
@@ -179,7 +182,7 @@ ul.seleccion li a{
 @media only screen and (min-width: 992px){
 		ul.seleccion li a{
 		margin: 10px 30px;
-		width: 26%;
+		width: 25%;
 		float:left;
 		}
 }
