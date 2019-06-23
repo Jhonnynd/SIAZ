@@ -66,6 +66,15 @@ div.titulo h1{
 	font-size: 1.7em;
 	color: white;
 }
+@media only screen and (max-width: 450px){
+		header.site-header{
+			padding: 15px 6px;
+		}
+		div.titulo h1{
+			font-size: 1.35em;
+		    margin: 10px 0 0 20px
+			}
+}
 @media only screen and (min-width: 992px){
 	div.logo{
 		float:left;
@@ -189,7 +198,11 @@ ul.seleccion li a{
 ul.seleccion li a:hover{
 		background-color: #025d9cdb;
 		}
-
+@media only screen and (max-width: 450px){
+ul.seleccion{
+	padding: 0;
+	}
+}
 
 /* INTERNOS */
 
@@ -222,12 +235,22 @@ div.campo input, select {
 	padding: 1em;
 }
 div.left{
-	margin-left: 15%;
-	float:left;
-	width: 40%;
+
+
 }
 div.right{
-	float:right;
-	margin-right: 15%;
-	width: 30%;
+
+
+}
+@media only screen and (min-width: 480px){
+	div.left{
+		float:left;
+		width: 40%;
+		margin-left: 15%;
+	}
+	div.right{
+		float:right;
+		width: 30%;
+		margin-right: 15%;
+	}
 }

@@ -68,15 +68,26 @@
 				</div>
 			</div>
 
-			<!-- <div class="right">
+			 <div class="right">
+				<div class="campo">
+					<label for="cargo">Departamento:<br>
+						<select name="departamento" value="-Any-">
+							<option>Selecciona un departamento</option>
+							<option value="1">Viajes y Turismo</option>
+							<option value="2">Informática</option>
+						</select>
+					</label>
+				</div>
 				<div class="campo">
 					<label for="cargo">Cargo:<br>
 						<select name="cargo" value="-Any-">
 							<option>Selecciona un cargo</option>
-							<option value=""></option>
+							<option value="1">Administrador</option>
+							<option value="2">Gerente</option>
+							<option value="3">Administrador de caja</option>
 						</select>
 					</label>
-				</div> -->
+				</div>
 				
 				<input class="agregar" type="submit" value="Agregar empleado">
 			</div>
