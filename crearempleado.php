@@ -20,7 +20,7 @@
 	try {
 		require_once("funciones/bd_conexion.php");
 		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `cargo_id`, `departamento_id`) ";
-		$sql .= " VALUES (NULL, '{#nombre}', '{#apellido}', '{#cedula}', '{#telefono}', '{#cargo}', '{#departamento}') ";
+		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', {$cargo}, {$departamento}) ";
 		$resultado = $conn->query($sql);
 
 

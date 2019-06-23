@@ -1,7 +1,10 @@
 <?php 
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = "SELECT * FROM contactos";
+		$sql = " SELECT nombre, apellido, cedula, telefono, departamentos.departamento, cargos.cargo FROM empleados ";
+		$sql .=" INNER JOIN departamentos ON departamentos.id = empleados.departamento_id ";
+		$sql .=" INNER JOIN cargos ON cargos.id = empleados.cargo_id ";
+		$sql .=" ORDER BY apellido ASC ";
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {
@@ -94,6 +97,57 @@
 				
 			</form>
 			
+			<div class="contenido existentes">
+				<h3>Empleados existentes</h3>
+				<p>
+					Número de empleados registrados en el sistema: <?php echo $resultado->num_rows; ?>
+				</p>
+		<table>
+			<thead>
+				<tr>
+					<th>Apellido</th>
+					<th>Nombre</th>
+					<th>Cédula</th>
+					<th>Teléfono</th>
+					<th>Departamento</th>
+					<th>Cargo</th>
+					<th>Editar</th>
+					<th>Borrar</th>
+				</tr>
+			</thead>
+			<tbody>
+				 <?php while($registros = $resultado->fetch_assoc() ){ ?>
+				 	<tr>
+				 		<td> 
+				 			<?php echo $registros['apellido']; ?> 
+				 		</td>
+				 		<td>
+				 		 	<?php echo $registros['nombre']; ?> 
+				 		</td>
+				 		<td> 
+				 			<?php echo $registros['cedula']; ?> 
+				 		</td>
+				 		<td>
+				 		 	<?php echo $registros['telefono']; ?> 
+				 		</td>
+				 		<td> 
+				 			<?php echo $registros['departamento']; ?> 
+				 		</td>
+				 		<td>
+				 		 	<?php echo $registros['cargo']; ?> 
+				 		</td>
+			 			<td> 
+				 			<a href="editar.php?id=<?php echo $registros['id']; ?>">Editar</a>
+						</td>
+				 		<td class="borrar">
+				 			<a href="borrar.php?id=<?php echo $registros['id']; ?>">Borrar</a>
+				 		</td>
+				 	</tr>
+				 	<?php  }?>
+			</tbody>
+		</table>
+			</div>
+
 
 		</div>
 	</div>
