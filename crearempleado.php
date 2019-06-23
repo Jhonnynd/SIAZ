@@ -19,6 +19,10 @@
 	}
 	try {
 		require_once("funciones/bd_conexion.php");
+		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `cargo_id`, `departamento_id`) ";
+		$sql .= " VALUES (NULL, '{#nombre}', '{#apellido}', '{#cedula}', '{#telefono}', '{#cargo}', '{#departamento}') ";
+		$resultado = $conn->query($sql);
+
 
 	} catch (Exception $e) {
 		$error = $e->getMessage();
@@ -63,9 +67,23 @@
 			<pre>
 				<?php var_dump($_POST); ?>
 			</pre>
+			<?php 
+			if($resultado){
+			echo "<h2>";
+			echo "Empleado agregado. Haz click en atrás para volver a la página anterior.";
+			echo "</h2>";
+			}else{
+			echo "<h2>";
+			echo "Ha ocurrido un error. Haz click en atrás para volver a la página anterior.";
+			echo "</h2> <br>";
+			echo $conn->error;
+			} ?>		
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
+<?php 
+	$conn->close(); 
+?>
 </body>
 </html>

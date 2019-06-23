@@ -70,7 +70,7 @@
 
 			 <div class="right">
 				<div class="campo">
-					<label for="cargo">Departamento:<br>
+					<label for="departamento">Departamento:<br>
 						<select name="departamento" value="-Any-">
 							<option>Selecciona un departamento</option>
 							<option value="1">Viajes y Turismo</option>
@@ -99,5 +99,6 @@
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
+<?php $conn->close(); ?>
 </body>
 </html>
