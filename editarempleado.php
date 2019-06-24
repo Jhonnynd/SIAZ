@@ -1,10 +1,11 @@
 <?php 
+if (isset ($_GET['id'])){
+	$id = $_GET['id'];
+}
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " SELECT empleados.id, nombre, apellido, cedula, telefono, departamentos.departamento, cargos.cargo FROM empleados ";
-		$sql .=" INNER JOIN departamentos ON departamentos.id = empleados.departamento_id ";
-		$sql .=" INNER JOIN cargos ON cargos.id = empleados.cargo_id ";
-		$sql .=" ORDER BY apellido ASC ";
+		$sql = " SELECT * FROM empleados ";
+		$sql .=" WHERE id = {$id} ";
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {
@@ -14,7 +15,7 @@
  <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-333555">
+	<meta charset="UTF-8">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
@@ -47,27 +48,28 @@
 			</nav>
 		</div>
 		<div class="contenido">
-			<h2>Agregar un empleado nuevo:</h2>
-			<form class="agregar-empleado clearfix" action="crearempleado.php" method="POST">
+			<h2>Editar empleado:</h2>
+			<form class="agregar-empleado clearfix" action="actualizarempleado.php" method="GET">
+					<?php while($registro = $resultado->fetch_assoc()) { ?>
 			<div class="left">
 				<div class="campo">
 					<label for="nombre">Nombre: <br> </label>
-						<input type="text" name="nombre" id="nombre" placeholder="Nombre">
+						<input type="text" value="<?php echo $registro['nombre'] ?>" name="nombre" id="nombre" placeholder="Nombre">
 				</div>
 
 				<div class="campo">
 					<label for="apellido">Apellido:<br></label>
-						<input type="text" name="apellido" id="apellido" placeholder="Apellido">
+						<input type="text" value="<?php echo $registro['apellido'] ?>" name="apellido" id="apellido" placeholder="Apellido">
 				</div>
 
 				<div class="campo">
 					<label for="cedula">Número de cédula:<br></label>
-						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula">
+						<input type="text" value="<?php echo $registro['cedula'] ?>" name="cedula" id="cedula" placeholder="Número de cédula">
 				</div>
 
 				<div class="campo">
 					<label for="telefono">Teléfono:<br></label>
-						<input type="text" name="telefono" id="telefono" placeholder="Teléfono">
+						<input type="text" value="<?php echo $registro['telefono'] ?>" name="telefono" id="telefono" placeholder="Teléfono">
 				</div>
 			</div>
 
@@ -77,6 +79,7 @@
 						<select name="departamento" value="-Any-">
 							<option>Selecciona un departamento</option>
 							<option value="1">Viajes y Turismo</option>
+							<option value="2">Informática</option>
 						</select>
 					</label>
 				</div>
@@ -90,64 +93,11 @@
 						</select>
 					</label>
 				</div>
-				
-				<input class="agregar" type="submit" value="Agregar empleado">
+				<input type="hidden" name="id" value="<?php echo $registro["id"]; ?>">
+				<input class="agregar" type="submit" value="Modificar empleado">
 			</div>
-				
+		<?php } ?>	
 			</form>
-			
-			<div class="contenido existentes">
-				<h3>Empleados existentes</h3>
-				<p>
-					Número de empleados registrados en el sistema: <?php echo $resultado->num_rows; ?>
-				</p>
-		<table>
-			<thead>
-				<tr>
-					<th>Apellido</th>
-					<th>Nombre</th>
-					<th>Cédula</th>
-					<th>Teléfono</th>
-					<th>Departamento</th>
-					<th>Cargo</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				 <?php while($registros = $resultado->fetch_assoc() ){ ?>
-				 	<tr>
-				 		<td> 
-				 			<?php echo $registros['apellido']; ?> 
-				 		</td>
-				 		<td>
-				 		 	<?php echo $registros['nombre']; ?> 
-				 		</td>
-				 		<td> 
-				 			<?php echo $registros['cedula']; ?> 
-				 		</td>
-				 		<td>
-				 		 	<?php echo $registros['telefono']; ?> 
-				 		</td>
-				 		<td> 
-				 			<?php echo $registros['departamento']; ?> 
-				 		</td>
-				 		<td>
-				 		 	<?php echo $registros['cargo']; ?> 
-				 		</td>
-			 			<td> 
-				 			<a class ="boton editar" href="editarempleado.php?id=<?php echo $registros['id']; ?>">Editar</a>
-						</td>
-				 		<td class="eliminar">
-				 			<a class ="boton eliminar" href="eliminarempleado.php?id=<?php echo $registros['id']; ?>">Borrar</a>
-				 		</td>
-				 	</tr>
-				 	<?php  }?>
-			</tbody>
-		</table>
-			</div>
-
-
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>

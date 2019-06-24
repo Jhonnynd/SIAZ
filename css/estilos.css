@@ -257,8 +257,7 @@ div.right{
 
 div.contenido.existentes{
 	text-align: center;
-	margin-top: 10px;
-	margin: 0 auto;
+	margin: 15px auto 0 auto;
 	padding: 20px;
 	background-color: #e1e1e1;
 }
@@ -283,4 +282,22 @@ div.existentes table tr td{
 }
 div.existentes table tbody tr:nth-child(even) {
   background-color: rgb(147, 149, 153);
+}
+.boton{
+	display: block;
+	text-decoration: none;
+	color: white;
+	padding: 10px 15px;
+}
+.boton.editar{
+	background-color: #005fa6;
+}
+.boton.editar:hover{
+	background-color: blue;
+}
+.boton.eliminar{
+	background-color: #ff2936;
+}
+.boton.eliminar:hover{
+	background-color: red;
 }
