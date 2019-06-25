@@ -301,11 +301,15 @@ div.existentes table tbody tr:nth-child(even) {
 .boton.eliminar:hover{
 	background-color: red;
 }
-.volver{
+div.volver{
+	text-align: center;
+}
+.btnvolver{
 	font-size: 18px;
 	color: white;
 	text-decoration: none;
 	padding: 10px 20px;
 	background-color: rgba(44, 48, 56, 0.48);
-	margin: 0 auto;
+	text-align: center;
+	display: inline-block;
 }

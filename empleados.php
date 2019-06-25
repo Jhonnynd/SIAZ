@@ -1,5 +1,4 @@
 
-
 <?php 
 
 	try {
@@ -22,6 +21,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
+	<script>
+		function validarcombobox(){
+		var departamentos = document.getElementById("departamento").selectedIndex;
+		var cargos = document.getElementById("cargo").selectedIndex;
+		if( departamentos != 0 && cargos != 0) {
+		        document.getElementById("agregar").disabled=false;
+		    }else{
+		        document.getElementById("agregar").disabled=true;
+		    }
+		}
+	</script>
 </head>
 <body>
 	<div class="contenedor">
@@ -76,25 +86,24 @@
 
 			 <div class="right">
 				<div class="campo">
-					<label for="departamento">Departamento:<br>
-						<select name="departamento" value="-Any-">
-							<option>Selecciona un departamento</option>
+					<label for="departamento" >Departamento:<br>
+						<select name="departamento" id="departamento" value="-Any-" onChange="validarcombobox()">>
+							<option value="0">Selecciona un departamento</option>
 							<option value="1">Viajes y Turismo</option>
 						</select>
 					</label>
 				</div>
 				<div class="campo">
 					<label for="cargo">Cargo:<br>
-						<select name="cargo" value="-Any-">
-							<option>Selecciona un cargo</option>
+						<select name="cargo" id="cargo" value="-Any-" onChange="validarcombobox()">>
+							<option value="0">Selecciona un cargo</option>
 							<option value="1">Administrador</option>
 							<option value="2">Gerente</option>
 							<option value="3">Administrador de caja</option>
 						</select>
 					</label>
 				</div>
-				
-				<input class="agregar" type="submit" value="Agregar empleado">
+				<input class="agregar" id="agregar" type="submit" value="Agregar empleado" disabled>
 			</div>
 				
 			</form>

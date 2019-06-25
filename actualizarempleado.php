@@ -82,7 +82,9 @@
 					echo "Ocurrio un error " . $conn->error;
 				}
 			 ?>
-		<a href="empleados.php">Agregar otro empleado</a>
+		<div class="volver">
+			<a class="btnvolver" href="empleados.php">Volver</a>
+		</div>
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>

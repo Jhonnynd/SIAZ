@@ -73,7 +73,9 @@
 			echo "</h2> <br>";
 			echo $conn->error;
 			} ?>	
-		<a class="volver" href="empleados.php">Volver</a>
+		<div class="volver">
+			<a class="btnvolver" href="empleados.php">Volver</a>
+		</div>
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>
