@@ -1,4 +1,7 @@
+
+
 <?php 
+
 	try {
 		require_once("funciones/bd_conexion.php");
 		$sql = " SELECT empleados.id, nombre, apellido, cedula, telefono, departamentos.departamento, cargos.cargo FROM empleados ";
@@ -48,26 +51,26 @@
 		</div>
 		<div class="contenido">
 			<h2>Agregar un empleado nuevo:</h2>
-			<form class="agregar-empleado clearfix" action="crearempleado.php" method="POST">
+			<form class="agregar-empleado clearfix" action="crearempleado.php" method="POST" onsubmit="return validar();">
 			<div class="left">
 				<div class="campo">
 					<label for="nombre">Nombre: <br> </label>
-						<input type="text" name="nombre" id="nombre" placeholder="Nombre">
+						<input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
 				</div>
 
 				<div class="campo">
 					<label for="apellido">Apellido:<br></label>
-						<input type="text" name="apellido" id="apellido" placeholder="Apellido">
+						<input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
 				</div>
 
 				<div class="campo">
 					<label for="cedula">Número de cédula:<br></label>
-						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula">
+						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula" required>
 				</div>
 
 				<div class="campo">
 					<label for="telefono">Teléfono:<br></label>
-						<input type="text" name="telefono" id="telefono" placeholder="Teléfono">
+						<input type="text" name="telefono" id="telefono" placeholder="Teléfono" required>
 				</div>
 			</div>
 
@@ -151,6 +154,7 @@
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>
+
 <script src="js/main.js"></script>
 <?php $conn->close(); ?>
 </body>

@@ -1,14 +1,14 @@
 <?php 
-	if(isset($_POST['nombre'])){
+	if(isset($_POST['nombre']) || trim($_POST['nombre']) !=""){
 		$nombre = $_POST['nombre'];
 	}
-	if(isset($_POST['apellido'])){
+	if(isset($_POST['apellido']) || trim($_POST['apellido']) !=""){
 		$apellido = $_POST['apellido'];
 	}
-	if(isset($_POST['cedula'])){
+	if(isset($_POST['cedula']) || trim($_POST['cedula']) !=""){
 		$cedula = $_POST['cedula'];
 	}
-	if(isset($_POST['telefono'])){
+	if(isset($_POST['telefono']) || trim($_POST['telefono']) !=""){
 		$telefono = $_POST['telefono'];
 	}
 	if(isset($_POST['departamento'])){
@@ -22,8 +22,6 @@
 		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `cargo_id`, `departamento_id`) ";
 		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', {$cargo}, {$departamento}) ";
 		$resultado = $conn->query($sql);
-
-
 	} catch (Exception $e) {
 		$error = $e->getMessage();
 	}
@@ -64,9 +62,6 @@
 			</nav>
 		</div>
 		<div class="contenido">
-			<pre>
-				<?php var_dump($_POST); ?>
-			</pre>
 			<?php 
 			if($resultado){
 			echo "<h2>";
@@ -77,7 +72,8 @@
 			echo "Ha ocurrido un error. Haz click en atrás para volver a la página anterior.";
 			echo "</h2> <br>";
 			echo $conn->error;
-			} ?>		
+			} ?>	
+		<a class="volver" href="empleados.php">Volver</a>
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>

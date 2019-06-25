@@ -40,7 +40,7 @@
 				<li><a href="empleados.php">Empleados</a></li>
 				<li><a href="boleteria.php">Boletería</a></li>
 				<li><a href="facturacion.php">Facturacion</a></li>
-			</ul>
+			</ul>	
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>

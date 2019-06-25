@@ -265,7 +265,7 @@ div.existentes table{
 	margin: 0 auto;
 }
 div.existentes  table {
-padding: 80px;
+	padding: 80px;
   width: 100%;
   font-family: geneva;
   font-size: 16px;
@@ -300,4 +300,12 @@ div.existentes table tbody tr:nth-child(even) {
 }
 .boton.eliminar:hover{
 	background-color: red;
+}
+.volver{
+	font-size: 18px;
+	color: white;
+	text-decoration: none;
+	padding: 10px 20px;
+	background-color: rgba(44, 48, 56, 0.48);
+	margin: 0 auto;
 }
