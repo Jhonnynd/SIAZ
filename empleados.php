@@ -1,6 +1,4 @@
-
 <?php 
-
 	try {
 		require_once("funciones/bd_conexion.php");
 		$sql = " SELECT empleados.id, nombre, apellido, cedula, telefono, departamentos.departamento, cargos.cargo FROM empleados ";
@@ -16,12 +14,22 @@
  <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-333555">
+	<meta charset="UTF-8">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
 	<script>
+			function confirmarBorrado(){
+			confirm("¿Deseas borrar este empleado? Esta acción no se puede deshacer.");
+			if (confirmar == true){
+			continue;
+			}
+			else{
+				window.location = "empleados.php";
+			}		
+			}
+		
 		function validarcombobox(){
 		var departamentos = document.getElementById("departamento").selectedIndex;
 		var cargos = document.getElementById("cargo").selectedIndex;
@@ -110,7 +118,7 @@
 			
 			<div class="contenido existentes">
 				<h3>Empleados existentes</h3>
-				<p>
+				<p class="empleados-registrados">
 					Número de empleados registrados en el sistema: <?php echo $resultado->num_rows; ?>
 				</p>
 		<table>
@@ -151,7 +159,7 @@
 				 			<a class ="boton editar" href="editarempleado.php?id=<?php echo $registros['id']; ?>">Editar</a>
 						</td>
 				 		<td class="eliminar">
-				 			<a class ="boton eliminar" href="eliminarempleado.php?id=<?php echo $registros['id']; ?>">Borrar</a>
+				 			<a class ="boton eliminar" id="eliminar"  onclick="return confirm('¿Estás seguro de que quieres eliminar este empleado? Esta acción no se puede deshacer.');" href="eliminarempleado.php?id=<?php echo $registros['id']; ?>">Borrar</a>
 				 		</td>
 				 	</tr>
 				 	<?php  }?>

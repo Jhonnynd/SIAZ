@@ -261,6 +261,9 @@ div.contenido.existentes{
 	padding: 20px;
 	background-color: #e1e1e1;
 }
+p.empleados-registrados{
+	font-size: 18px;
+}
 div.existentes table{
 	margin: 0 auto;
 }
