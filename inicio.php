@@ -1,18 +1,6 @@
-	<?php 
-	if (isset ($_GET['id'])){
-		$id = $_GET['id'];
-	}
-	try {
-		require_once("funciones/bd_conexion.php");
-		$sql = "DELETE FROM `empleados` ";
-		$sql .= "WHERE `id` = '{$id}'";
-		$resultado = $conn->query($sql);
+<?php session_start(); ?>
 
-	} catch (Exception $e) {
-		$error -> $e->getMessage();
-	}
- ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -40,32 +28,24 @@
 			</div>
 			<nav class="navegacion">
 					<ul class="clearfix">	
-						<li><a href="inicio.php">Inicio</a></li>
-						<li><a class="activo" href="empleados.php">Empleados</a></li>
+						<li><a class="activo" href="inicio.php">Inicio</a></li>
+						<li><a href="empleados.php">Empleados</a></li>
 						<li><a href="boleteria.php">Boletería</a></li>
 						<li><a href="facturacion.php">Facturacion</a></li>
 					</ul>
 			</nav>
 		</div>
 		<div class="contenido">
-			<?php 	
-				if($resultado){
-					echo "<h2>";
-					echo "Empleado eliminado corrrectamente. <br><hr><br>";
-					echo "</h2>";
-				} else{
-					echo "<h2>";
-					echo "Ocurrio un error " . $conn->error;
-					echo "</h2>";
-				}
-			 ?>
-		<div class="volver">
-			<a class="btnvolver" href="empleados.php">Volver</a>
-		</div>
+			<h2>Bienvenido al Sistema de información administrativo de la empresa Viajes y Turismo ZUMAQUE, C.A. Elige qué quieres hacer:</h2>
+
+			<ul class="seleccion clearfix">
+				<li><a href="empleados.php">Empleados</a></li>
+				<li><a href="boleteria.php">Boletería</a></li>
+				<li><a href="facturacion.php">Facturacion</a></li>
+			</ul>	
 		</div>
 	</div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
-<?php $conn->close(); ?>
 </body>
 </html>

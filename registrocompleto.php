@@ -11,6 +11,12 @@
 	if(isset($_POST['telefono']) || trim($_POST['telefono']) !=""){
 		$telefono = $_POST['telefono'];
 	}
+	if(isset($_POST['usuario']) || trim($_POST['usuario']) !=""){
+		$usuario = $_POST['usuario'];
+	}
+	if(isset($_POST['password']) || trim($_POST['password']) !=""){
+		$password = $_POST['password'];
+	}
 	if(isset($_POST['departamento'])){
 		$departamento = $_POST['departamento'];
 	}
@@ -19,14 +25,14 @@
 	}
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `cargo_id`, `departamento_id`) ";
-		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', {$cargo}, {$departamento}) ";
+		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `usuario`, `password`, `cargo_id`, `departamento_id`) ";
+		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$usuario}', '{$password}', '{$cargo}', '{$departamento}') ";
 		$resultado = $conn->query($sql);
 	} catch (Exception $e) {
 		$error = $e->getMessage();
 	}
- ?>
- <!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -34,6 +40,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
+	<script>
+		function validarcombobox(){
+		var departamentos = document.getElementById("departamento").selectedIndex;
+		var cargos = document.getElementById("cargo").selectedIndex;
+		if( departamentos != 0 && cargos != 0) {
+		        document.getElementById("agregar").disabled=false;
+		    }else{
+		        document.getElementById("agregar").disabled=true;
+		    }
+		}
+	</script>
 </head>
 <body>
 	<div class="contenedor">
@@ -52,36 +69,23 @@
 				<span></span>
 				<span></span>
 			</div>
-			<nav class="navegacion">
-					<ul class="clearfix">	
-						<li><a href="inicio.php">Inicio</a></li>
-						<li><a class="activo" href="empleados.php">Empleados</a></li>
-						<li><a href="boleteria.php">Boletería</a></li>
-						<li><a href="facturacion.php">Facturacion</a></li>
-					</ul>
-			</nav>
 		</div>
 		<div class="contenido">
 			<?php 
 			if($resultado){
 			echo "<h2>";
-			echo "Empleado agregado. Haz click en atrás para volver a la página anterior.";
+			echo "Te has registrado con éxito. Haz click en atrás para volver a la página anterior.";
 			echo "</h2>";
 			}else{
 			echo "<h2>";
 			echo "Ha ocurrido un error. Haz click en atrás para volver a la página anterior.";
 			echo "</h2> <br>";
 			echo $conn->error;
-			} ?>	
+			} ?>
 		<div class="volver">
-			<a class="btnvolver" href="empleados.php">Volver</a>
+		<a class="btnvolver" href="index.php">Volver</a>
 		</div>
 		</div>
-	</div>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/main.js"></script>
-<?php 
-	$conn->close(); 
-?>
+</div>
 </body>
 </html>

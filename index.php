@@ -7,7 +7,7 @@
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body class="login">
 	<div class="contenedor">
 	<header class="site-header clearfix">
 		<div class="logo">
@@ -24,26 +24,21 @@
 				<span></span>
 				<span></span>
 			</div>
-			<nav class="navegacion">
-					<ul class="clearfix">	
-						<li><a class="activo" href="index.php">Inicio</a></li>
-						<li><a href="empleados.php">Empleados</a></li>
-						<li><a href="boleteria.php">Boletería</a></li>
-						<li><a href="facturacion.php">Facturacion</a></li>
-					</ul>
-			</nav>
+			
 		</div>
 		<div class="contenido">
-			<h2>Bienvenido al Sistema de información administrativo de la empresa Viajes y Turismo ZUMAQUE, C.A. Elige qué quieres hacer:</h2>
+			<form action="funciones/validar.php" method="POST">
+			<div class="campo">
+					<label for="usuario">Usuario:<br></label>
+					<input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+				</div>
 
-			<ul class="seleccion clearfix">
-				<li><a href="empleados.php">Empleados</a></li>
-				<li><a href="boleteria.php">Boletería</a></li>
-				<li><a href="facturacion.php">Facturacion</a></li>
-			</ul>	
+				<div class="campo">
+					<label for="password">Contraseña:<br></label>
+					<input type="password" name="password" id="password" placeholder="Contraseña" required>
+				</div>
+				<input class="agregar" type="submit" value="Iniciar sesión">
+				</form>
+				<a href="registro.php"><br><br>¿No tienes cuenta? Regístrate</a>
 		</div>
-	</div>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>
+</div>

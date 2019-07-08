@@ -11,22 +11,30 @@
 	if(isset($_POST['telefono']) || trim($_POST['telefono']) !=""){
 		$telefono = $_POST['telefono'];
 	}
-	if(isset($_POST['departamento'])){
-		$departamento = $_POST['departamento'];
+	if(isset($_POST['destino_salida'])){
+		$salida = $_POST['destino_salida'];
 	}
-	if(isset($_POST['cargo'])){
-		$cargo = $_POST['cargo'];
+	if(isset($_POST['destino_llegada'])){
+		$llegada = $_POST['destino_llegada'];
 	}
+	if(isset($_POST['dia'])){
+		$dia = $_POST['dia'];
+	}
+	if(isset($_POST['hora'])){
+		$hora = $_POST['hora'];
+	} 
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `cargo_id`, `departamento_id`) ";
-		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', {$cargo}, {$departamento}) ";
+		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `hora_salida` ) ";
+		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$llegada}', '{$salida}', '{$dia}', '{$hora}') ";
+
 		$resultado = $conn->query($sql);
 	} catch (Exception $e) {
 		$error = $e->getMessage();
 	}
  ?>
- <!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -55,8 +63,8 @@
 			<nav class="navegacion">
 					<ul class="clearfix">	
 						<li><a href="inicio.php">Inicio</a></li>
-						<li><a class="activo" href="empleados.php">Empleados</a></li>
-						<li><a href="boleteria.php">Boletería</a></li>
+						<li><a href="empleados.php">Empleados</a></li>
+						<li><a class="activo" href="boleteria.php">Boletería</a></li>
 						<li><a href="facturacion.php">Facturacion</a></li>
 					</ul>
 			</nav>
@@ -65,7 +73,7 @@
 			<?php 
 			if($resultado){
 			echo "<h2>";
-			echo "Empleado agregado. Haz click en atrás para volver a la página anterior.";
+			echo "Factura generada exitosamente. Haz click en atrás para volver a la página anterior.";
 			echo "</h2>";
 			}else{
 			echo "<h2>";
@@ -74,7 +82,7 @@
 			echo $conn->error;
 			} ?>	
 		<div class="volver">
-			<a class="btnvolver" href="empleados.php">Volver</a>
+			<a class="btnvolver" href="boleteria.php">Volver</a>
 		</div>
 		</div>
 	</div>

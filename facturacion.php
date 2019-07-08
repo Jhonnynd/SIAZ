@@ -61,65 +61,19 @@
 			<nav class="navegacion">
 					<ul class="clearfix">	
 						<li><a href="inicio.php">Inicio</a></li>
-						<li><a class="activo" href="empleados.php">Empleados</a></li>
+						<li><a href="empleados.php">Empleados</a></li>
 						<li><a href="boleteria.php">Boletería</a></li>
-						<li><a href="facturacion.php">Facturacion</a></li>
+						<li><a class="activo" href="facturacion.php">Facturacion</a></li>
 					</ul>
 			</nav>
 		</div>
 		<div class="contenido">
-			<h2>Agregar un empleado nuevo:</h2>
-			<form class="agregar-empleado clearfix" action="crearempleado.php" method="POST" onsubmit="return validar();">
-			<div class="left">
-				<div class="campo">
-					<label for="nombre">Nombre: <br> </label>
-						<input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
-				</div>
-
-				<div class="campo">
-					<label for="apellido">Apellido:<br></label>
-						<input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
-				</div>
-
-				<div class="campo">
-					<label for="cedula">Número de cédula:<br></label>
-						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula" required>
-				</div>
-
-				<div class="campo">
-					<label for="telefono">Teléfono:<br></label>
-						<input type="text" name="telefono" id="telefono" placeholder="Teléfono" required>
-				</div>
-			</div>
-
-			 <div class="right">
-				<div class="campo">
-					<label for="departamento" >Departamento:<br>
-						<select name="departamento" id="departamento" value="-Any-" onChange="validarcombobox()">>
-							<option value="0">Selecciona un departamento</option>
-							<option value="1">Viajes y Turismo</option>
-						</select>
-					</label>
-				</div>
-				<div class="campo">
-					<label for="cargo">Cargo:<br>
-						<select name="cargo" id="cargo" value="-Any-" onChange="validarcombobox()">>
-							<option value="0">Selecciona un cargo</option>
-							<option value="1">Administrador</option>
-							<option value="2">Gerente</option>
-							<option value="3">Administrador de caja</option>
-							<option value="4">Asesor de viajes</option>
-						</select>
-					</label>
-				</div>
-				<input class="agregar" id="agregar" type="submit" value="Agregar empleado" disabled>
-			</div>
-			</form>
+			<h2>Facturas generadas</h2>
 			
 			<div class="contenido existentes">
-				<h3>Empleados existentes</h3>
+				<h3>Facturas en total</h3>
 				<p class="empleados-registrados">
-					Número de empleados registrados en el sistema: <?php echo $resultado->num_rows; ?>
+					Número de facturas registradas en el sistema: <?php echo $resultado->num_rows; ?>
 				</p>
 		<div class="table-responsive-vertical">
 				<table class ="table table-bordered table-striped table-hover">

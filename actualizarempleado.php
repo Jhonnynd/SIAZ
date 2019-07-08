@@ -64,7 +64,7 @@
 			</div>
 			<nav class="navegacion">
 					<ul class="clearfix">	
-						<li><a href="index.php">Inicio</a></li>
+						<li><a href="inicio.php">Inicio</a></li>
 						<li><a class="activo" href="empleados.php">Empleados</a></li>
 						<li><a href="boleteria.php">Boletería</a></li>
 						<li><a href="facturacion.php">Facturacion</a></li>

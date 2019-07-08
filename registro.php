@@ -1,18 +1,5 @@
-<?php 
-if (isset ($_GET['id'])){
-	$id = $_GET['id'];
-}
-	try {
-		require_once("funciones/bd_conexion.php");
-		$sql = " SELECT * FROM empleados ";
-		$sql .=" WHERE id = {$id} ";
-		$resultado = $conn->query($sql);
 
-	} catch (Exception $e) {
-		$error = $e->getMessage();
-	}
- ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -49,38 +36,30 @@ if (isset ($_GET['id'])){
 				<span></span>
 				<span></span>
 			</div>
-			<nav class="navegacion">
-					<ul class="clearfix">	
-						<li><a href="inicio.php">Inicio</a></li>
-						<li><a class="activo" href="empleados.php">Empleados</a></li>
-						<li><a href="boleteria.php">Boletería</a></li>
-						<li><a href="facturacion.php">Facturacion</a></li>
-					</ul>
-			</nav>
+			
 		</div>
 		<div class="contenido">
-			<h2>Editar empleado:</h2>
-			<form class="agregar-empleado clearfix" action="actualizarempleado.php" method="GET">
-					<?php while($registro = $resultado->fetch_assoc()) { ?>
+			
+			<form class="agregar-empleado clearfix" action="registrocompleto.php" method="POST" onsubmit="return validar();">
 			<div class="left">
 				<div class="campo">
 					<label for="nombre">Nombre: <br> </label>
-						<input type="text" value="<?php echo $registro['nombre'] ?>" name="nombre" id="nombre" placeholder="Nombre">
+						<input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
 				</div>
 
 				<div class="campo">
 					<label for="apellido">Apellido:<br></label>
-						<input type="text" value="<?php echo $registro['apellido'] ?>" name="apellido" id="apellido" placeholder="Apellido">
+						<input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
 				</div>
-
+				
 				<div class="campo">
 					<label for="cedula">Número de cédula:<br></label>
-						<input type="text" value="<?php echo $registro['cedula'] ?>" name="cedula" id="cedula" placeholder="Número de cédula">
+						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula" required>
 				</div>
 
 				<div class="campo">
 					<label for="telefono">Teléfono:<br></label>
-						<input type="text" value="<?php echo $registro['telefono'] ?>" name="telefono" id="telefono" placeholder="Teléfono">
+						<input type="text" name="telefono" id="telefono" placeholder="Teléfono" required>
 				</div>
 			</div>
 
@@ -104,15 +83,22 @@ if (isset ($_GET['id'])){
 						</select>
 					</label>
 				</div>
-				<input type="hidden" name="id" value="<?php echo $registro["id"]; ?>">
-				<input class="agregar" type="submit" value="Modificar empleado">
+
+				<div class="campo">
+					<label for="usuario">Usuario:<br></label>
+					<input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+				</div>
+
+				<div class="campo">
+					<label for="password">Contraseña:<br></label>
+					<input type="password" name="password" id="password" placeholder="Contraseña" required>
+				</div>
+
+				<input class="agregar" id="agregar" type="submit" value="Registrar" disabled>
 			</div>
-		<?php } ?>	
+		
 			</form>
 		</div>
-	</div>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/main.js"></script>
-<?php $conn->close(); ?>
+</div>
 </body>
 </html>
