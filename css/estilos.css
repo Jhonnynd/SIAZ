@@ -264,7 +264,7 @@ p.empleados-registrados{
 
 /* --------------TABLA RESPONSIVE---------- */
 
-/* div.existentes table{
+ div.existentes table{
 	margin: 0 auto;
 }
 div.existentes  table {
@@ -281,8 +281,8 @@ div.existentes table tr td{
 	line-height: 20px;
 }
 
-*/
-.table {
+
+/* .table {
 			width:100%;
 			max-width: 100%;
 			margin-bottom: 2rem;
@@ -364,7 +364,7 @@ div.existentes table tr td{
 		.table-hover > tbody > tr:hover > td,
 		.table-hover > tbody > tr:hover > th {
 			background-color: rgba(0,0,0,0.12);
-		}
+		} */
 		@media screen and (max-width: 1100px){
 			.table-responsive-vertical > .table{
 				margin-bottom: 0;
@@ -474,4 +474,8 @@ div.volver{
 .login .contenido{
 	margin: 0 auto;
 	text-align: center;
+}
+
+.icons {
+	color: black;
 }

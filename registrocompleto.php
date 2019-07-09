@@ -1,4 +1,5 @@
 <?php 
+	require_once("funciones/bd_conexion.php");
 	if(isset($_POST['nombre']) || trim($_POST['nombre']) !=""){
 		$nombre = $_POST['nombre'];
 	}
@@ -23,14 +24,7 @@
 	if(isset($_POST['cargo'])){
 		$cargo = $_POST['cargo'];
 	}
-	try {
-		require_once("funciones/bd_conexion.php");
-		$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `usuario`, `password`, `cargo_id`, `departamento_id`) ";
-		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$usuario}', '{$password}', '{$cargo}', '{$departamento}') ";
-		$resultado = $conn->query($sql);
-	} catch (Exception $e) {
-		$error = $e->getMessage();
-	}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,25 +56,38 @@
 			<h1>Sistema de Información Administrativo ZUMAQUE</h1>
 		</div>
 	</header>
-	
-		<div class="barra clearfix">
-			<div class="menu-movil">
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-		</div>
 		<div class="contenido">
-			<?php 
-			if($resultado){
+		<?php 
+		$sql = "SELECT * FROM empleados WHERE usuario = '{$usuario}' LIMIT 1 ";
+		$resultado = $conn->query($sql);
+		$verificarUsuario = 0;
+		while ($verificacion = mysqli_fetch_object($resultado)){
+			if ($verificacion->usuario == $usuario){
+				$verificarUsuario = 1;
+			}
+		}
+		if ($verificarUsuario == 1) {
 			echo "<h2>";
-			echo "Te has registrado con éxito. Haz click en atrás para volver a la página anterior.";
-			echo "</h2>";
-			}else{
-			echo "<h2>";
-			echo "Ha ocurrido un error. Haz click en atrás para volver a la página anterior.";
+			echo "El usuario ingresado ya esta registrado en nuestra base de datos, por favor elige otro. Haz click en atrás para volver a la página anterior.";
 			echo "</h2> <br>";
-			echo $conn->error;
+		} else {
+				try {
+						$sql = " INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `usuario`, `password`, `cargo_id`, `departamento_id`) ";
+						$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$usuario}', '{$password}', '{$cargo}', '{$departamento}') ";
+						$result = $conn->query($sql);
+						} catch (Exception $e) {
+						$error = $e->getMessage();
+					} 
+				if($result){
+				echo "<h2>";
+				echo "Te has registrado con éxito. Haz click en atrás para volver a la página anterior.";
+				echo "</h2>";
+				} else{
+				echo "<h2>";
+				echo "Ha ocurrido un error. Haz click en atrás para volver a la página anterior.";
+				echo "</h2> <br>";
+				echo $conn->error;
+				}
 			} ?>
 		<div class="volver">
 		<a class="btnvolver" href="index.php">Volver</a>

@@ -20,16 +20,6 @@
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
 	<script>
-			function confirmarBorrado(){
-			confirm("¿Deseas borrar este empleado? Esta acción no se puede deshacer.");
-			if (confirmar == true){
-			continue;
-			}
-			else{
-				window.location = "empleados.php";
-			}		
-			}
-		
 		function validarcombobox(){
 		var departamentos = document.getElementById("departamento").selectedIndex;
 		var cargos = document.getElementById("cargo").selectedIndex;
@@ -122,7 +112,7 @@
 					Número de empleados registrados en el sistema: <?php echo $resultado->num_rows; ?>
 				</p>
 		<div class="table-responsive-vertical">
-				<table class ="table table-bordered table-striped table-hover">
+			<table class ="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>
 					<th>Apellido</th>

@@ -29,15 +29,7 @@
 			<h1>Sistema de Información Administrativo ZUMAQUE</h1>
 		</div>
 	</header>
-	
-		<div class="barra clearfix">
-			<div class="menu-movil">
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-			
-		</div>
+
 		<div class="contenido">
 			
 			<form class="agregar-empleado clearfix" action="registrocompleto.php" method="POST" onsubmit="return validar();">
