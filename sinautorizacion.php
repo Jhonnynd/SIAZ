@@ -1,22 +1,10 @@
 <?php session_start(); 
-	$varsession = $_SESSION['usuario'];
-	if($varsession == null || $varsession = ''){
-		header ("location:index.php");
-	}
-	if (isset ($_GET['id'])){
-		$id = $_GET['id'];
-	}
-	try {
-		require_once("funciones/bd_conexion.php");
-		$sql = "DELETE FROM facturas ";
-		$sql .= "WHERE idFactura = '{$id}' ";
-		$resultado = $conn->query($sql);
-
-	} catch (Exception $e) {
-		$error -> $e->getMessage();
-	}
- ?>
- <!DOCTYPE html>
+$varsession = $_SESSION['usuario'];
+if($varsession == null || $varsession = ''){
+	header ("location:index.php");
+}
+?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -45,36 +33,22 @@
 			<nav class="navegacion">
 					<ul class="clearfix">	
 						<li><a href="inicio.php">Inicio</a></li>
-						<li><a class="activo" href="empleados.php">Empleados</a></li>
+						<li><a href="empleados.php">Empleados</a></li>
 						<li><a href="boleteria.php">Boletería</a></li>
 						<li><a href="facturacion.php">Facturacion</a></li>
 					</ul>
 			</nav>
 		</div>
 		<div class="contenido">
-			<?php 	
-				if($resultado){
-					echo "<h2>";
-					echo "Factura eliminada corrrectamente. <br><hr><br>";
-					echo "</h2>";
-				} else{
-					echo "<h2>";
-					echo "Ocurrio un error " . $conn->error;
-					echo "</h2>";
-				}
-			 ?>
-		<div class="volver">
-			<a class="btnvolver" href="facturacion.php">Volver</a>
-		</div>
+			<h2>Lo sentimos. Necesitas tener el cargo de administrador o asesor de viajes para ver esto.</h2>
 		</div>
 	</div>
-<footer>
+	<footer>
 	<div>
 	<a href="funciones/close.php">Cerrar sesíón</a>
 	</div>
 </footer>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
-<?php $conn->close(); ?>
 </body>
 </html>

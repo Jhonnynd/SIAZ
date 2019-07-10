@@ -1,4 +1,8 @@
-<?php 
+<?php session_start(); 
+	$varsession = $_SESSION['usuario'];
+	if($varsession == null || $varsession = ''){
+		header ("location:index.php");
+	}
 if (isset ($_GET['id'])){
 	$id = $_GET['id'];
 }
@@ -111,6 +115,12 @@ if (isset ($_GET['id'])){
 			</form>
 		</div>
 	</div>
+<footer>
+	<div>
+	<a href="funciones/close.php">Cerrar sesíón</a>
+	</div>
+</footer>
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
 <?php $conn->close(); ?>

@@ -1,4 +1,8 @@
-<?php 
+<?php session_start(); 
+	$varsession = $_SESSION['usuario'];
+	if($varsession == null || $varsession = ''){
+		header ("location:index.php");
+	}
 	if(isset($_POST['nombre']) || trim($_POST['nombre']) !=""){
 		$nombre = $_POST['nombre'];
 	}
@@ -23,10 +27,13 @@
 	if(isset($_POST['hora'])){
 		$hora = $_POST['hora'];
 	} 
+	if(isset($_POST['total'])){
+		$total = $_POST['total'];
+	} 
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `hora_salida` ) ";
-		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$llegada}', '{$salida}', '{$dia}', '{$hora}') ";
+		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `hora_salida`, `total` ) ";
+		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$llegada}', '{$salida}', '{$dia}', '{$hora}', '{$total}') ";
 
 		$resultado = $conn->query($sql);
 	} catch (Exception $e) {
@@ -86,6 +93,11 @@
 		</div>
 		</div>
 	</div>
+<footer>
+	<div>
+	<a href="funciones/close.php">Cerrar sesíón</a>
+	</div>
+</footer>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
 <?php 

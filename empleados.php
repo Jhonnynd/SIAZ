@@ -1,4 +1,8 @@
-<?php 
+<?php session_start(); 
+	$varsession = $_SESSION['usuario'];
+	if($varsession == null || $varsession = ''){
+		header ("location:index.php");
+	}
 	try {
 		require_once("funciones/bd_conexion.php");
 		$sql = " SELECT empleados.id, nombre, apellido, cedula, telefono, departamentos.departamento, cargos.cargo FROM empleados ";
@@ -161,6 +165,11 @@
 	</div>
 	</div>
 
+<footer>
+	<div>
+	<a href="funciones/close.php">Cerrar sesíón</a>
+	</div>
+</footer>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
 <?php $conn->close(); ?>

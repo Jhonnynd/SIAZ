@@ -1,10 +1,23 @@
-<?php session_start();
+<?php session_start(); 
+	$varsession = $_SESSION['usuario'];
+	if($varsession == null || $varsession = ''){
+		header ("location:index.php");
+	}
+	$usuario = $_SESSION['usuario'];
+	require_once("funciones/bd_conexion.php");
+		$consulta = "SELECT * FROM empleados WHERE usuario = '{$usuario}' AND cargo_id = 1 OR usuario = '{$usuario}' AND cargo_id = 4; ";
+		$respuesta = mysqli_query($conn, $consulta);
+		$filas = mysqli_num_rows($respuesta);
+		if ($filas < 1) {
+			header ("location:sinautorizacion.php");
+		} 
+		mysqli_free_result($respuesta);
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " SELECT idFactura, apellidoCliente, nombreCliente, cedulaCliente, destinos_salida.destino as salida, destinos_llegada.destino as llegada, fecha_salida FROM facturas ";
+		$sql = " SELECT idFactura, apellidoCliente, nombreCliente, cedulaCliente, destinos_salida.destino as salida, destinos_llegada.destino as llegada, fecha_salida , total FROM facturas ";
 		$sql .=" INNER JOIN destinos as destinos_salida ON destinos_salida.idDestino = facturas.idDestino_salida  ";
 		$sql .=" INNER JOIN destinos as destinos_llegada ON destinos_llegada.idDestino = facturas.idDestino_llegada ";
-		$sql .=" ORDER BY apellidoCliente ASC ";
+		$sql .=" ORDER BY idFactura DESC";
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {
@@ -60,13 +73,14 @@
 				<table class ="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>
-					<th>Factura</th>
+					<th>Referencia</th>
 					<th>Apellido</th>
 					<th>Nombre</th>
 					<th>Cédula</th>
 					<th>Salida</th>
 					<th>Fecha de salida</th>
 					<th>Llegada</th>
+					<th>Total</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -74,7 +88,7 @@
 			<tbody>
 				 	 <?php while($registros = $resultado->fetch_assoc() ){ ?>
 				 	<tr>
-				 		<td data-title="Factura"> 
+				 		<td data-title="Referencia"> 
 				 			<?php echo $registros['idFactura']; ?> 
 				 		</td>
 				 		<td data-title="Apellido">
@@ -95,6 +109,9 @@
 				 		<td data-title="Llegada"> 
 				 		 	<?php echo $registros['llegada']; ?> 
 				 		</td>
+				 		<td data-title="total"> 
+				 		 	<?php echo $registros['total']; ?> 
+				 		</td>
 			 			<td data-title=""> 
 				 			<a class ="boton editar" href="editarempleado.php?id=<?php echo $registros['idFactura']; ?>">Imprimir</a>
 						</td>
@@ -109,7 +126,11 @@
 	</div>
 	</div>
 	</div>
-
+<footer>
+	<div>
+	<a href="funciones/close.php">Cerrar sesíón</a>
+	</div>
+</footer>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
 <?php $conn->close(); ?>

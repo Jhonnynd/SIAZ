@@ -1,3 +1,19 @@
+<?php session_start(); 
+	$varsession = $_SESSION['usuario'];
+	if($varsession == null || $varsession = ''){
+		header ("location:index.php");
+	}
+	$usuario = $_SESSION['usuario'];
+	require_once("funciones/bd_conexion.php");
+		$consulta = "SELECT * FROM empleados WHERE usuario = '{$usuario}' AND cargo_id = 1 OR usuario = '{$usuario}' AND cargo_id = 4; ";
+		$respuesta = mysqli_query($conn, $consulta);
+		$filas = mysqli_num_rows($respuesta);
+		if ($filas < 1) {
+			header ("location:sinautorizacion.php");
+		} 
+		mysqli_free_result($respuesta);
+	?>
+	
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -35,8 +51,9 @@
 		</div>
 		<div class="contenido">
 			<h2>Crear un boleto de viaje. Ingresa los datos del cliente</h2>
-			<form class="agregar-empleado clearfix" action="facturagenerada.php" method="POST" onsubmit="return validar();">
-			<div class="left">
+			<form class="agregar-empleado" action="facturagenerada.php" method="POST" onsubmit="return validar();">
+			<div class="form-boleteria clearfix">
+				<div class="left">
 				<div class="campo">
 					<label for="nombre">Nombre del cliente: <br> </label>
 						<input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
@@ -86,12 +103,25 @@
 					<label for="hora">Hora de salida:<br></label>
 						<input type="time" name="hora" id="hora" required>
 				</div>
-			<input class="agregar" type="submit" value="Generar factura">
+				<div class="campo">
+					<label for="total">Total a pagar:<br></label>
+						<input type="number" name="total" id="total" required>
+				</div>
 			</div>
+		</div>
+				<div class="campo-agregar">
+				<input class="agregar agregar-boleto" type="submit" value="Generar factura">
+				</div>
 			</form>
-			
+			</div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
+
+<footer>
+	<div>
+	<a href="funciones/close.php">Cerrar sesíón</a>
+	</div>
+</footer>
 </body>
 </html>

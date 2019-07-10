@@ -36,3 +36,5 @@
 				<p>¿No tienes cuenta? <a href="registro.php">Regístrate</a></p>
 		</div>
 </div>
+</body>
+</html>
