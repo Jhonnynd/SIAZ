@@ -36,7 +36,7 @@ if($varsession == null || $varsession = ''){
 						<li><a class="activo" href="inicio.php">Inicio</a></li>
 						<li><a href="empleados.php">Empleados</a></li>
 						<li><a href="boleteria.php">Boletería</a></li>
-						<li><a href="facturacion.php">Facturacion</a></li>
+						<li><a href="facturacion.php">Facturación</a></li>
 					</ul>
 			</nav>
 		</div>

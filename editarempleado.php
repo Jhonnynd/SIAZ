@@ -10,6 +10,7 @@ if (isset ($_GET['id'])){
 		require_once("funciones/bd_conexion.php");
 		$sql = " SELECT * FROM empleados ";
 		$sql .=" WHERE id = {$id} ";
+		$conn->set_charset('utf8');
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {

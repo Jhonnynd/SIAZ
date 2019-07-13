@@ -9,6 +9,7 @@
 		$sql .=" INNER JOIN departamentos ON departamentos.id = empleados.departamento_id ";
 		$sql .=" INNER JOIN cargos ON cargos.id = empleados.cargo_id ";
 		$sql .=" ORDER BY apellido ASC ";
+		$conn->set_charset('utf8');
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {
@@ -82,7 +83,7 @@
 
 				<div class="campo">
 					<label for="telefono">Teléfono:<br></label>
-						<input type="text" name="telefono" id="telefono" placeholder="Teléfono" required>
+						<input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required>
 				</div>
 			</div>
 

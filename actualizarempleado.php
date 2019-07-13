@@ -34,6 +34,7 @@
 		$sql .= "`departamento_id` = '{$departamento}', ";
 		$sql .= "`cargo_id` = '{$cargo}' ";
 		$sql .= "WHERE `id` = '{$id}'  ";
+		$conn->set_charset('utf8');
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {
@@ -76,14 +77,15 @@
 			</nav>
 		</div>
 		<div class="contenido">
-			<pre>
-				<?php var_dump($_GET); ?>
-			</pre>
 			<?php 	
 				if($resultado){
+					echo "<h2>";
 					echo "Empleado actualizado <br><hr><br>";
+					echo "</h2>";
 				} else{
+					echo "<h2>";
 					echo "Ocurrio un error " . $conn->error;
+					echo "</h2>";
 				}
 			 ?>
 		<div class="volver">

@@ -3,6 +3,15 @@
 	if($varsession == null || $varsession = ''){
 		header ("location:index.php");
 	}
+	$usuario = $_SESSION['usuario'];
+	require_once("funciones/bd_conexion.php");
+		$consulta = "SELECT * FROM empleados WHERE usuario = '{$usuario}' AND cargo_id = 1 OR usuario = '{$usuario}' AND cargo_id = 4; ";
+		$respuesta = mysqli_query($conn, $consulta);
+		$filas = mysqli_num_rows($respuesta);
+		if ($filas < 1) {
+			header ("location:sinautorizacion.php");
+		} 
+		mysqli_free_result($respuesta);
 	if (isset ($_GET['id'])){
 		$id = $_GET['id'];
 	}

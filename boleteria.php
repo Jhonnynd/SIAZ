@@ -22,6 +22,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="stylesheet" href="css/estilos.css">
+	<script>
+		function validarcombobox(){
+		var aereolinea = document.getElementById("aereolinea").selectedIndex;
+		var destino_salida = document.getElementById("destino_salida").selectedIndex;
+		var destino_llegada = document.getElementById("destino_llegada").selectedIndex;
+		if( aereolinea != 0 && destino_salida != 0 && destino_llegada != 0) {
+		        document.getElementById("agregar").disabled=false;
+		    }else{
+		        document.getElementById("agregar").disabled=true;
+		    }
+		}
+	</script>
 </head>
 <body>
 	<div class="contenedor">
@@ -71,14 +83,24 @@
 
 				<div class="campo">
 					<label for="telefono">Teléfono del cliente:<br></label>
-						<input type="text" name="telefono" id="telefono" placeholder="Teléfono" required>
+						<input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required>
 				</div>
 			</div>
 
 			 <div class="right">
 				<div class="campo">
-					<label for="destino_salida">Salida<br>
+					<label for="aereolinea">Aereolínea:<br>
+						<select name="aereolinea" id="aereolinea" value="-Any-" onChange="validarcombobox()">>
+							<option value="0">Selecciona una aereolínea</option>
+							<option value="1">Estelar</option>
+							<option value="2">Conviasa</option>
+						</select>
+					</label>
+				</div>
+				<div class="campo">
+					<label for="destino_salida">Salida:<br>
 						<select name="destino_salida" id="destino_salida" value="-Any-" onChange="validarcombobox()">>
+							<option value="0">Selecciona un destino</option>
 							<option value="1">Maracaibo</option>
 							<option value="2">Caracas</option>
 						</select>
@@ -87,7 +109,8 @@
 				<div class="campo">
 					<label for="destino_llegada">Llegada:<br>
 						<select name="destino_llegada" id="destino_llegada" value="-Any-" onChange="validarcombobox()">>
-							<option value="3">Medellin</option>
+							<option value="0">Selecciona un destino</option>
+							<option value="3">Medellín</option>
 							<option value="4">Bogotá</option>
 							<option value="5">Santiago</option>
 							<option value="6">Quito</option>
@@ -96,21 +119,29 @@
 					</label>
 				</div>
 				<div class="campo">
-					<label for="dia">Dia de salida:<br></label>
-						<input type="date" name="dia" id="dia" required>
+					<label for="dia_salida">Dia de salida:<br></label>
+						<input type="date" name="dia_salida" id="dia_salida" required>
 				</div>
 				<div class="campo">
-					<label for="hora">Hora de salida:<br></label>
-						<input type="time" name="hora" id="hora" required>
+					<label for="dia_llegada">Dia de llegada:<br></label>
+						<input type="date" name="dia_llegada" id="dia_llegada" required>
 				</div>
 				<div class="campo">
-					<label for="total">Total a pagar:<br></label>
-						<input type="number" name="total" id="total" required>
+					<label for="hora_salida">Hora de salida:<br></label>
+						<input type="time" name="hora_salida" id="hora_salida" required>
+				</div>
+				<div class="campo">
+					<label for="hora_llegada">Hora de llegada:<br></label>
+						<input type="time" name="hora_llegada" id="hora_llegada" required>
+				</div>
+				<div class="campo">
+					<label for="costo">Costo del boleto:<br></label>
+						<input type="number" name="costo" id="costo" required>
 				</div>
 			</div>
 		</div>
 				<div class="campo-agregar">
-				<input class="agregar agregar-boleto" type="submit" value="Generar factura">
+				<input class="agregar agregar-boleto" type="submit" id="agregar" value="Generar factura" disabled>
 				</div>
 			</form>
 			</div>

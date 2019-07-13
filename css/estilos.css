@@ -18,7 +18,7 @@ body{
 	background-color: #f2f2f2;
 }
 body .activo{
-	background-color: #b2b1af70;;
+	background-color: #b2b1af8c;
 }
 h1, h2{
 	padding:0;
@@ -175,7 +175,7 @@ ul{
 }
 ul.seleccion li{
 	text-align: center;
-	margin: 15px;
+	margin-top: 15px;
 }
 
 ul.seleccion li a{
@@ -192,7 +192,7 @@ ul.seleccion li a{
 		ul.seleccion li a{
 		margin: 10px 30px;
 		width: 25%;
-		float:left;
+		float: left;
 		}
 }
 ul.seleccion li a:hover{

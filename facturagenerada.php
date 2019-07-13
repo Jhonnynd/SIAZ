@@ -15,26 +15,34 @@
 	if(isset($_POST['telefono']) || trim($_POST['telefono']) !=""){
 		$telefono = $_POST['telefono'];
 	}
+	if(isset($_POST['aereolinea']) || trim($_POST['aereolinea']) !=""){
+		$aereolinea = $_POST['aereolinea'];
+	}
 	if(isset($_POST['destino_salida'])){
 		$salida = $_POST['destino_salida'];
 	}
 	if(isset($_POST['destino_llegada'])){
 		$llegada = $_POST['destino_llegada'];
 	}
-	if(isset($_POST['dia'])){
-		$dia = $_POST['dia'];
+	if(isset($_POST['dia_salida'])){
+		$dia_salida = $_POST['dia_salida'];
 	}
-	if(isset($_POST['hora'])){
-		$hora = $_POST['hora'];
+	if(isset($_POST['dia_llegada'])){
+		$dia_llegada = $_POST['dia_llegada'];
+	}
+	if(isset($_POST['hora_salida'])){
+		$hora_salida = $_POST['hora_salida'];
 	} 
-	if(isset($_POST['total'])){
-		$total = $_POST['total'];
+	if(isset($_POST['hora_llegada'])){
+		$hora_llegada = $_POST['hora_llegada'];
+	} 
+	if(isset($_POST['costo'])){
+		$costo = $_POST['costo'];
 	} 
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `hora_salida`, `total` ) ";
-		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$llegada}', '{$salida}', '{$dia}', '{$hora}', '{$total}') ";
-
+		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `aereolinea_id`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `fecha_llegada`,  `hora_salida`, `hora_llegada`, `costo` ) ";
+		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$aereolinea}', '{$llegada}', '{$salida}', '{$dia_salida}', '{$dia_llegada}', '{$hora_salida}', '{$hora_llegada}', '{$costo}' ) ";
 		$resultado = $conn->query($sql);
 	} catch (Exception $e) {
 		$error = $e->getMessage();

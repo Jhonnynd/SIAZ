@@ -1,4 +1,5 @@
 <?php session_start(); 
+	
 	$varsession = $_SESSION['usuario'];
 	if($varsession == null || $varsession = ''){
 		header ("location:index.php");
@@ -14,10 +15,11 @@
 		mysqli_free_result($respuesta);
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " SELECT idFactura, apellidoCliente, nombreCliente, cedulaCliente, destinos_salida.destino as salida, destinos_llegada.destino as llegada, fecha_salida , total FROM facturas ";
+		$sql = " SELECT idFactura, apellidoCliente, nombreCliente, cedulaCliente, destinos_salida.destino as salida, destinos_llegada.destino as llegada, fecha_salida , costo FROM facturas ";
 		$sql .=" INNER JOIN destinos as destinos_salida ON destinos_salida.idDestino = facturas.idDestino_salida  ";
 		$sql .=" INNER JOIN destinos as destinos_llegada ON destinos_llegada.idDestino = facturas.idDestino_llegada ";
 		$sql .=" ORDER BY idFactura DESC";
+		$conn->set_charset('utf8');
 		$resultado = $conn->query($sql);
 
 	} catch (Exception $e) {
@@ -55,7 +57,7 @@
 						<li><a href="inicio.php">Inicio</a></li>
 						<li><a href="empleados.php">Empleados</a></li>
 						<li><a href="boleteria.php">Boletería</a></li>
-						<li><a class="activo" href="facturacion.php">Facturacion</a></li>
+						<li><a class="activo" href="facturacion.php">Facturación</a></li>
 					</ul>
 			</nav>
 		</div>
@@ -85,8 +87,9 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody> 
 				 	 <?php while($registros = $resultado->fetch_assoc() ){ ?>
+				 	 	<?php $total = ( $registros['costo'] * 0.18 ) + $registros['costo']; ?>
 				 	<tr>
 				 		<td data-title="Referencia"> 
 				 			<?php echo $registros['idFactura']; ?> 
@@ -104,16 +107,16 @@
 				 			<?php echo $registros['salida']; ?> 
 				 		</td>
 				 		<td data-title="Fecha de salida"> 
-				 		 	<?php echo $registros['fecha_salida']; ?> 
+				 		 	<?php echo date("d/m/Y", strtotime($registros['fecha_salida'])); ?> 
 				 		</td>
 				 		<td data-title="Llegada"> 
 				 		 	<?php echo $registros['llegada']; ?> 
 				 		</td>
-				 		<td data-title="total"> 
-				 		 	<?php echo $registros['total']; ?> 
+				 		<td data-title="Total"> 
+				 		 	<?php echo $total; ?> 
 				 		</td>
 			 			<td data-title=""> 
-				 			<a class ="boton editar" href="editarempleado.php?id=<?php echo $registros['idFactura']; ?>">Imprimir</a>
+				 			<a class ="boton editar" href="print_pdf.php?id=<?php echo $registros['idFactura']; ?>">Imprimir</a>
 						</td>
 				 		<td data-title="" class="eliminar">
 				 			<a class ="boton eliminar" id="eliminar"  onclick="return confirm('¿Estás seguro de que quieres eliminar esta factura? Esta acción no se puede deshacer.');" href="eliminarfactura.php?id=<?php echo $registros['idFactura']; ?>">Borrar</a>
