@@ -7,6 +7,7 @@ ob_start();
 require_once 'print_view.php';
 $html = ob_get_clean();
 $html2pdf = new Html2Pdf('P', 'A4', 'es', 'true', 'UTF-8');
+$html2pdf->pdf->SetDisplayMode('fullpage');
 $html2pdf->writeHTML($html);
 $html2pdf->output('Factura_de_Viajes_y_Turismo_ZUMAQUE.pdf');
 

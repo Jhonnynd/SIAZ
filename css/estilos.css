@@ -190,10 +190,14 @@ ul.seleccion li a{
 
 @media only screen and (min-width: 992px){
 		ul.seleccion li a{
-		margin: 10px 30px;
-		width: 25%;
-		float: left;
+		margin: 10px 0;
 		}
+		ul.seleccion li{
+			float:left;
+			width: 33.3%;
+			padding: 10px;
+		}
+
 }
 ul.seleccion li a:hover{
 		background-color: #025d9cdb;

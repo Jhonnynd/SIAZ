@@ -32,6 +32,7 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
+	<link rel="icon" href="favicon.ico" type="image/ico">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
