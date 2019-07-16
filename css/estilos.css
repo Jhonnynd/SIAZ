@@ -497,3 +497,20 @@ footer div{
 footer div a{
 	color:black;
 }
+span.generar{
+	display: block;
+	text-align: right;
+	margin: 0 20px 20px 0;
+}
+span.generar i{
+	margin-right: 5px;
+	color:red;
+	width: 12px;
+}
+span.generar a{
+	color: black;
+	text-decoration: none;
+}
+span.generar a:hover{
+	text-decoration: underline;
+}

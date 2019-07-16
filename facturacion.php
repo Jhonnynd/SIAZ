@@ -35,6 +35,7 @@
 	<title>Sistema de Información Administrativo ZUMAQUE</title>
 	<link rel="icon" href="favicon.ico" type="image/ico">
 	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
 	<div class="contenedor">
@@ -64,13 +65,12 @@
 		</div>
 		<div class="contenido">
 			<h2>Facturas generadas</h2>
-			
 			<div class="contenido existentes">
 				<h3>Facturas en total</h3>
 				<p class="empleados-registrados">
 					Número de facturas registradas en el sistema: <?php echo $resultado->num_rows; ?>
 				</p>
-
+			<span class="generar"><i class="fa fa-file-pdf-o"></i><a href="print_pdf_reportes.php">Generar informe de ventas</a></span>
 
 		<div class="table-responsive-vertical">
 				<table class ="table table-bordered table-striped table-hover">

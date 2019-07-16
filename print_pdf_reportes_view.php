@@ -12,9 +12,6 @@
 			header ("location:sinautorizacion.php");
 		} 
 		mysqli_free_result($respuesta);
-if (isset ($_GET['id'])){
-	$id = $_GET['id'];
-}
 	try {
 		require_once("funciones/bd_conexion.php");
 		$sql = " SELECT idFactura, apellidoCliente, nombreCliente, cedulaCliente, telefonoCliente, destinos_salida.destino as salida, destinos_llegada.destino as llegada, fecha_salida, fecha_llegada, hora_salida, hora_llegada, aereolineas.aereolinea as aereolinea, costo, forma_pago.pago as pago FROM facturas ";
@@ -22,10 +19,9 @@ if (isset ($_GET['id'])){
 		$sql .=" INNER JOIN destinos as destinos_llegada ON destinos_llegada.idDestino = facturas.idDestino_llegada ";
 		$sql .=" INNER JOIN aereolineas ON aereolineas.idAereolinea = facturas.aereolinea_id ";
 		$sql .=" INNER JOIN forma_pago ON forma_pago.idPago = facturas.idForma_pago ";
-		$sql .=" WHERE idFactura = {$id} ";
+		$sql .=" ORDER BY apellidoCliente";
 		$conn->set_charset('utf8');
 		$resultado = $conn->query($sql);
-
 	} catch (Exception $e) {
 		$error = $e->getMessage();
 	}
@@ -80,9 +76,11 @@ if (isset ($_GET['id'])){
 		 width: 100%;
 		 border-collapse: collapse;
 		}
-		
-		div.existentes table tr td{
-			padding: 10px 26px;
+		table tr th{
+			padding: 10px 14px;
+		}
+		table tr td{
+			padding: 10px 3px;
 			line-height: 20px;
 		}
 		div.costos{
@@ -101,52 +99,96 @@ if (isset ($_GET['id'])){
 	</style>
 </head>
 <body>
- <?php $registros = $resultado->fetch_assoc() ?>
+
 	<div class="header">
 				<img class="logo-zumaque" src="img/logo.jpg" alt="">
 				<p>Viajes y Turismo ZUMAQUE, C.A.</p>
 				<p></p>
 				<p>Viajes@zumaque.net</p>
-				<p>Emitido <?php date_default_timezone_set('America/Caracas'); $date = date('d/m/Y h:i:s a', time()); echo $date; ?></p>
+				<p>Fecha de emisión: <?php date_default_timezone_set('America/Caracas'); $date = date('d/m/Y h:i:s a', time()); echo $date; ?></p>
 	</div>	
 	<div class="info">
-	<h1>Billete electrónico</h1>
-	<h2>Recibo del pasajero</h2>	
-	<p>Nombre: <span><?php echo $registros['apellidoCliente'] . " " . $registros['nombreCliente'] ; ?></span> </p>
-	<p>Número de cédula: <span>V<?php echo $registros['cedulaCliente']; ?></span> </p>
-	<p>Número de contacto: <span><?php echo $registros['telefonoCliente']; ?></span> </p>
-	<p>Forma de pago: <span><?php echo $registros['pago']; ?></span> </p>
-	<p>Referencia de factura: <span><?php echo $registros['idFactura']; ?></span> </p>
+	<h1>Informe de facturas</h1>
+	<h2>Facturas generadas en total: <?php echo $resultado->num_rows; ?> </h2>	
 	</div>
-
 	<div class="vuelo existentes">
-	<p class="bold">Itinerario</p> 	
 	<hr>
-	<p>Aéreolinea: <span><?php echo $registros['aereolinea']; ?></span> </p>
-	<?php 
-	//Unix
-	setlocale(LC_TIME, 'es_ES.UTF-8');
-	 //Windows
-	setlocale(LC_TIME, 'spanish'); 
-	 ?>
-	<p>SALIDA: <span><?php echo $registros['salida']; ?></span> </p>
-	<p>LLEGADA: <span><?php echo $registros['llegada']; ?></span> </p>
-
-				<table class="table table-bordered table-striped table-hover">
+				<table border="1" class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>
+					<th>Ref</th>
+					<th>Apellido</th>
+					<th>Nombre</th>
+					<th>Cédula</th>
 					<th>Aéreolinea</th>
-					<th>Fecha de salida</th>
+					<th>Fecha</th>
 					<th>Salida</th> 
-					<th>Hora de salida</th> 
-					<th>Fecha de llegada</th>
 					<th>Llegada</th>
-					<th>Hora de llegada</th>
+					<th>Pago</th>
+					<th>Total</th>
 				</tr>
 			</thead>
 			<tbody> 
-						<?php $total = ( $registros['costo'] * 0.18 ) + $registros['costo']; ?>
-					<tr>
+				 	 <?php while($registros = $resultado->fetch_assoc() ){ ?>
+				 	 	<?php $total = ( $registros['costo'] * 0.18 ) + $registros['costo']; ?>
+				 	<tr>
+				 		<td data-title="Referencia"> 
+				 			<?php echo $registros['idFactura']; ?> 
+				 		</td>
+				 		<td data-title="Apellido">
+				 		 	<?php echo $registros['apellidoCliente']; ?> 
+				 		</td>
+				 		<td data-title="Nombre"> 
+				 			<?php echo $registros['nombreCliente']; ?> 
+				 		</td>
+				 		<td data-title="Cedula">
+				 		 	<?php echo $registros['cedulaCliente']; ?> 
+				 		</td>
+				 		<td data-title="Aereolinea">
+				 		 	<?php echo $registros['aereolinea']; ?> 
+				 		</td>
+				 		<td data-title="Fecha de salida"> 
+				 		 	<?php echo date("d/m/Y", strtotime($registros['fecha_salida'])); ?> 
+				 		</td>
+				 		<td data-title="Salida"> 
+				 			<?php echo $registros['salida']; ?> 
+				 		</td>
+				 		
+				 		<td data-title="Llegada"> 
+				 		 	<?php echo $registros['llegada']; ?> 
+				 		</td>
+				 		<td data-title="pago"> 
+				 		 	<?php echo $registros['pago']; ?> 
+				 		</td>
+				 		<td data-title="Total"> 
+				 		 	<?php echo $total; ?> 
+				 		</td>
+					</tr> 
+					<?php } ?>
+			</tbody>
+		</table>
+</div>
+<div class="costos">
+	<p class="bold total-text">TOTAL GANADO</p>
+	<?php $suma = $conn->query("SELECT SUM(costo) as costo_value FROM facturas"); ?>
+	<?php $row = $suma->fetch_assoc(); ?>
+	<?php $sum = $row['costo_value']; ?>
+	<p class="total"><?php echo ($sum * 0.18 ) + $sum; ?> BsS</p>
+</div>
+		<?php $conn->close(); ?>
+</body>
+</html>
+
+<!--
+
+				<pre>
+				 		<?php var_dump($registros); ?>
+				 	</pre> 	
+						
+
+
+	-->
+	<!--<tr>
 				 		<td data-title="Aereolinea">
 				 		 	<?php echo $registros['aereolinea']; ?> 
 				 		</td>
@@ -167,30 +209,4 @@ if (isset ($_GET['id'])){
 				 		</td>
 				 		<td data-title="Hora de llegada"> 
 				 		 	<?php echo date("h:i a", strtotime($registros['hora_llegada'])); ?> 
-				 		</td>
-				 	</tr>
-
-			</tbody>
-		</table>
-	</div>
-		<div class="costos"> 
-		<p class="bold">COSTO DEL BOLETO:</p>
-		<p><?php echo $registros['costo'] . " BsS"; ?></p>
-		<p class="bold">IVA 18%</p>
-		<p> <?php echo $registros['costo'] * 0.18 . " BsS"; ?> </p>
-		<p class="bold total-text">TOTAL:</p>
-		<p class="bold total"> <?php echo $total . " BsS"; ?> </p>
-	</div>
-<?php $conn->close(); ?>
-</body>
-</html>
-
-<!--
-
-				<pre>
-				 		<?php var_dump($registros); ?>
-				 	</pre> 	
-						
-
-
-	-->
+				 		</td>-->

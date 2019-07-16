@@ -27,7 +27,8 @@
 		var aereolinea = document.getElementById("aereolinea").selectedIndex;
 		var destino_salida = document.getElementById("destino_salida").selectedIndex;
 		var destino_llegada = document.getElementById("destino_llegada").selectedIndex;
-		if( aereolinea != 0 && destino_salida != 0 && destino_llegada != 0) {
+		var forma_pago = document.getElementById("forma_pago").selectedIndex;
+		if( aereolinea != 0 && destino_salida != 0 && destino_llegada != 0 && forma_pago != 0) {
 		        document.getElementById("agregar").disabled=false;
 		    }else{
 		        document.getElementById("agregar").disabled=true;
@@ -68,22 +69,22 @@
 				<div class="left">
 				<div class="campo">
 					<label for="nombre">Nombre del cliente: <br> </label>
-						<input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+						<input type="text" name="nombre" id="nombre" placeholder="Nombre" maxlength="10" required>
 				</div>
 
 				<div class="campo">
 					<label for="apellido">Apellido del cliente:<br></label>
-						<input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
+						<input type="text" name="apellido" id="apellido" placeholder="Apellido" maxlength="10" required>
 				</div>
 
 				<div class="campo">
 					<label for="cedula">Número de cédula del cliente:<br></label>
-						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula" required>
+						<input type="text" name="cedula" id="cedula" placeholder="Número de cédula" maxlength="8" required>
 				</div>
 
 				<div class="campo">
 					<label for="telefono">Teléfono del cliente:<br></label>
-						<input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required>
+						<input type="tel" name="telefono" id="telefono" placeholder="Teléfono" maxlength="11" required>
 				</div>
 			</div>
 
@@ -137,6 +138,16 @@
 				<div class="campo">
 					<label for="costo">Costo del boleto:<br></label>
 						<input type="number" name="costo" id="costo" required>
+				</div>
+				<div class="campo">
+					<label for="forma_pago">Forma de pago:<br>
+						<select name="forma_pago" id="forma_pago" value="-Any-" onChange="validarcombobox()">>
+							<option value="0">Selecciona una forma de pago</option>
+							<option value="1">Crédito</option>
+							<option value="2">Débito</option>
+							<option value="3">Transferencia</option>
+						</select>
+					</label>
 				</div>
 			</div>
 		</div>

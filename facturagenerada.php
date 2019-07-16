@@ -39,10 +39,14 @@
 	if(isset($_POST['costo'])){
 		$costo = $_POST['costo'];
 	} 
+	if(isset($_POST['forma_pago'])){
+		$forma_pago = $_POST['forma_pago'];
+	} 
 	try {
 		require_once("funciones/bd_conexion.php");
-		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `aereolinea_id`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `fecha_llegada`,  `hora_salida`, `hora_llegada`, `costo` ) ";
-		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$aereolinea}', '{$llegada}', '{$salida}', '{$dia_salida}', '{$dia_llegada}', '{$hora_salida}', '{$hora_llegada}', '{$costo}' ) ";
+		$sql = " INSERT INTO `facturas` (`idFactura`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `telefonoCliente`, `aereolinea_id`, `idDestino_llegada`, `idDestino_salida`, `fecha_salida`, `fecha_llegada`,  `hora_salida`, `hora_llegada`, `costo`, `idForma_pago` ) ";
+		$sql .= " VALUES (NULL, '{$nombre}', '{$apellido}', '{$cedula}', '{$telefono}', '{$aereolinea}', '{$llegada}', '{$salida}', '{$dia_salida}', '{$dia_llegada}', '{$hora_salida}', '{$hora_llegada}', '{$costo}', '{$forma_pago}' ) ";
+		$conn->set_charset('utf8');
 		$resultado = $conn->query($sql);
 	} catch (Exception $e) {
 		$error = $e->getMessage();
